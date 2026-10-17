@@ -1,0 +1,139 @@
+@startuml Scoala de soferi
+!theme plain
+skinparam linetype ortho
+hide circle 
+
+title Diagrama conceptuală - Școala de șoferi 
+
+entity "ELEV" as E {
+  * elev_id : NUMBER <<PK>>
+  --
+  nume : VARCHAR2(50)
+  prenume : VARCHAR2(50)
+  cnp : CHAR(13)
+  data_nasterii : DATE
+  telefon : VARCHAR2(15)
+  email : VARCHAR2(50)
+  adresa : VARCHAR2(100)
+}
+
+entity "INSTRUCTOR" as I {
+  * instructor_id : NUMBER <<PK>>
+  --
+  nume : VARCHAR2(50)
+  prenume : VARCHAR2(50)
+  cnp : CHAR(13)
+  telefon : VARCHAR2(15)
+  email : VARCHAR2(50)
+  data_angajare : DATE
+  salariu : NUMBER(8,2)
+}
+
+entity "VEHICUL" as V {
+  * vehicul_id : NUMBER <<PK>>
+  --
+  marca : VARCHAR2(30)
+  model : VARCHAR2(30)
+  categorie : CHAR(2)
+  nr_inmatriculare : VARCHAR2(10)
+  itp_expira : DATE
+}
+
+entity "DOSAR_INSCRIERE" as D {
+  * dosar_id : NUMBER <<PK>>
+  --
+  elev_id : NUMBER <<FK>>
+  categorie_permis : CHAR(2)
+  taxa_totala : NUMBER
+  suma_achitata : NUMBER
+  status_dosar : VARCHAR2(20)
+  aviz_psihologic : VARCHAR2(20)
+  fisa_medicala : VARCHAR2(20)
+}
+
+entity "PLATA" as P {
+  * plata_id : NUMBER <<PK>>
+  --
+  dosar_id : NUMBER <<FK>>
+  suma : NUMBER
+  data_plata : DATE
+  metoda_plata : VARCHAR2(20)
+}
+
+entity "SEDINTA_PRACTICA" as SP {
+  * sedinta_id : NUMBER <<PK>>
+  --
+  elev_id : NUMBER <<FK>>
+  instructor_id : NUMBER <<FK>>
+  vehicul_id : NUMBER <<FK>>
+  data_sedinta : DATE
+  durata_ore : NUMBER
+  km_parcursi : NUMBER
+  status : VARCHAR2(20)
+}
+
+entity "CURS_TEORETIC" as C {
+  * curs_id : NUMBER <<PK>>
+  --
+  tema : VARCHAR2(100)
+  durata_ore : NUMBER
+  data_inceput : DATE
+  data_final : DATE
+}
+
+entity "PARTICIPARE_CURS" as PC {
+  * curs_id : NUMBER <<PK, FK>>
+  * elev_id : NUMBER <<PK, FK>>
+  --
+}
+
+entity "EXAMINATOR" as EX {
+  * examinator_id : NUMBER <<PK>>
+  --
+  nume : VARCHAR2(50)
+  prenume : VARCHAR2(50)
+  cnp : CHAR(13)
+}
+
+entity "EXAMEN" as E2 {
+  * examen_id : NUMBER <<PK>>
+  --
+  elev_id : NUMBER <<FK>>
+  examinator_id : NUMBER <<FK>>
+  tip : VARCHAR2(10)
+  data_examen : DATE
+  punctaj : NUMBER
+  rezultat : VARCHAR2(10)
+  incercare : NUMBER
+}
+
+entity "LICENTA_INSTRUCTOR" as LI {
+  * instructor_id : NUMBER <<PK, FK>>
+  * categorie : CHAR(2) <<PK>>
+  --
+  data_obtinere : DATE
+  valabila_pana : DATE
+}
+
+entity "REVIZIE_VEHICUL" as RV {
+  * revizie_id : NUMBER <<PK>>
+  --
+  vehicul_id : NUMBER <<FK>>
+  data_revizie : DATE
+  rezultat : VARCHAR2(20)
+}
+
+' ===== RELAȚII Crow’s Foot =====
+E ||--o{ D
+D ||--o{ P
+E ||--o{ SP
+I ||--o{ SP
+V ||--o{ SP
+E ||--o{ E2
+EX ||--o{ E2
+E ||--o{ PC
+C ||--o{ PC
+I ||--|{ LI
+V ||--|{ RV
+
+@enduml
