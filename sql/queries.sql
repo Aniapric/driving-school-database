@@ -1,6 +1,6 @@
--- ========================================================
+
 -- 1. Complex Queries
--- ========================================================
+
 
 -- Instructors with students who passed the theory exam
 SELECT i.nume, i.prenume, i.salariu
@@ -64,9 +64,11 @@ SELECT UPPER(nume) || ' ' || SUBSTR(prenume, 1, 3) || '.' AS nume_formatat,
 FROM Detalii_Instructori
 ORDER BY luni_vechime DESC;
 
--- ========================================================
+
+
+
 -- 2. Advanced Operations
--- ========================================================
+
 
 -- 4-table outer join (ELEV, SEDINTA_PRACTICA, INSTRUCTOR, VEHICUL)
 SELECT e.nume AS nume_elev,
@@ -102,9 +104,10 @@ SELECT * FROM (
 )
 WHERE ROWNUM <= 3;
 
--- ========================================================
+
+
 -- 3. Views & DML Operations
--- ========================================================
+
 
 -- Student file summary view
 CREATE OR REPLACE VIEW VW_DETALII_DOSAR_ELEV AS
@@ -150,9 +153,10 @@ WHERE status = 'Programată'
     WHERE rezultat = 'Respins'
   );
 
--- ========================================================
+
+
 -- 4. Indexing & Query Tuning
--- ========================================================
+
 
 -- Indexes for frequent query paths
 CREATE INDEX idx_examen_filtru ON EXAMEN(tip, rezultat); 
