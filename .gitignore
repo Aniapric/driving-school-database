@@ -1,0 +1,15 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Editor & IDE Files
+.vscode/
+.idea/
+
+# University archives, raw docs & screenshots (excluded from GitHub)
+archive/
+screenshots/
+docs/
