@@ -1,4 +1,4 @@
-@startuml Scoala de soferi
+@startuml Driving School
 !theme plain
 skinparam linetype ortho
 hide circle 
