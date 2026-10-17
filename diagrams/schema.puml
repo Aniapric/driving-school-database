@@ -123,7 +123,7 @@ entity "REVIZIE_VEHICUL" as RV {
   rezultat : VARCHAR2(20)
 }
 
-' ===== RELAȚII Crow’s Foot =====
+' ===== Crow’s Foot =====
 E ||--o{ D
 D ||--o{ P
 E ||--o{ SP
